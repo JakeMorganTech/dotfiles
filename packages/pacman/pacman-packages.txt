@@ -1,0 +1,17 @@
+vim
+kitty
+flatpak
+discover
+steam
+godot
+blender
+git
+git-lfs
+starship
+cava
+cmatrix
+btop
+nvtop
+clang
+ttf-cascadia-code-nerd
+ttf-cascadia-mono-nerd
