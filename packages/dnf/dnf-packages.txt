@@ -10,9 +10,7 @@ nvtop
 clang
 dotnet-runtime-8.0
 dotnet-sdk-8.0
-flatpak
 kitty
-plasma-discover
 steam
 godot
 blender
