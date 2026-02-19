@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Unreal Engine 5.5
+Comment=Launches Unreal Engine 5.5
+Exec=/home/jake/UnrealEngine/Linux_Unreal_Engine_5.5.4/Engine/Binaries/Linux/UnrealEditor
+Icon=/home/jake/.local/share/icons/unreal-icons/unreal_editor.png
+Terminal=false
+Type=Application
+MimeType=application/x-uproject;
+Categories=Development;
+#StartupWMClass=UnrealEditor
+

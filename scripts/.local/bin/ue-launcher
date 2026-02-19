@@ -1,0 +1,239 @@
+#!/bin/bash
+
+# Unreal Engine Version Launcher for Arch Linux
+# Usage: ./ue_launcher.sh <version> [project_file]
+# Example: ./ue_launcher.sh 5.5 MyProject.uproject
+# Example: ./ue_launcher.sh 5.3 (launches editor without project)
+
+# Function to auto-detect Unreal Engine installations
+auto_detect_ue_paths() {
+    local common_locations=(
+        "/opt/UnrealEngine"
+        "/opt/unreal-engine" 
+        "/usr/local/UnrealEngine"
+        "$HOME/UnrealEngine"
+        "$HOME/.local/share/UnrealEngine"
+    )
+    
+    for base_path in "${common_locations[@]}"; do
+        if [[ -d "$base_path" ]]; then
+            for version_dir in "$base_path"/UE_*; do
+                if [[ -d "$version_dir" ]]; then
+                    local version=$(basename "$version_dir" | sed 's/UE_//')
+                    local exec_path="$version_dir/Engine/Binaries/Linux/UnrealEditor"
+                    if [[ -x "$exec_path" ]]; then
+                        UE_PATHS["$version"]="$exec_path"
+                    fi
+                fi
+            done
+        fi
+    done
+}
+
+# Configuration - Unreal Engine installation paths
+# Priority: Environment variables > User config > Auto-detection > Default paths
+
+# Check for user config file first
+CONFIG_FILE="$HOME/.config/ue-launcher/ue-launcher-config"
+if [[ -f "$CONFIG_FILE" ]]; then
+    source "$CONFIG_FILE"
+fi
+
+# Set default engine version (fallback if not set in config file)
+DEFAULT_UE_VERSION="${DEFAULT_UE_VERSION:-5.5}"
+
+# Auto-detect installations
+declare -A UE_PATHS
+auto_detect_ue_paths
+
+# Override with environment variables if set
+[[ -n "$UE_5_5_PATH" ]] && UE_PATHS["5.5"]="$UE_5_5_PATH"
+[[ -n "$UE_5_3_PATH" ]] && UE_PATHS["5.3"]="$UE_5_3_PATH"
+
+# Fallback to manual paths if auto-detection failed
+[[ -z "${UE_PATHS["5.5"]}" ]] && UE_PATHS["5.5"]="/opt/UnrealEngine/UE_5.5/Engine/Binaries/Linux/UnrealEditor"
+[[ -z "${UE_PATHS["5.3"]}" ]] && UE_PATHS["5.3"]="/opt/UnrealEngine/UE_5.3/Engine/Binaries/Linux/UnrealEditor"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Function to display usage
+show_usage() {
+    echo -e "${BLUE}Unreal Engine Version Launcher${NC}"
+    echo "Usage: $0 [version] [project_file]"
+    echo ""
+    echo "Available versions:"
+    for version in "${!UE_PATHS[@]}"; do
+        if [[ "$version" == "$DEFAULT_UE_VERSION" ]]; then
+            echo "  - $version (default)"
+        else
+            echo "  - $version"
+        fi
+    done
+    echo ""
+    echo "Examples:"
+    echo "  $0                           # Launch default version ($DEFAULT_UE_VERSION) editor only"
+    echo "  $0 MyProject.uproject        # Launch with version auto-detected from project"
+    echo "  $0 5.5 MyProject.uproject    # Launch UE 5.5 with project (override auto-detection)"
+    echo "  $0 5.3                       # Launch UE 5.3 editor only"
+    echo "  $0 5.5 /path/to/project.uproject  # Launch with full path and version override"
+}
+
+# Function to check if Unreal Engine executable exists
+check_ue_executable() {
+    local version=$1
+    local ue_path=${UE_PATHS[$version]}
+    
+    if [[ -z "$ue_path" ]]; then
+        echo -e "${RED}Error: Version $version is not configured${NC}"
+        return 1
+    fi
+    
+    if [[ ! -f "$ue_path" ]]; then
+        echo -e "${RED}Error: Unreal Engine $version not found at: $ue_path${NC}"
+        echo -e "${YELLOW}Please update the UE_PATHS array in this script with the correct path${NC}"
+        return 1
+    fi
+    
+    if [[ ! -x "$ue_path" ]]; then
+        echo -e "${RED}Error: Unreal Engine $version is not executable: $ue_path${NC}"
+        return 1
+    fi
+    
+    return 0
+}
+
+# Function to extract engine version from .uproject file
+extract_engine_version() {
+    local project_file=$1
+    local engine_version=""
+    
+    if [[ -f "$project_file" ]]; then
+        # Extract EngineAssociation value using grep and sed
+        engine_version=$(grep -o '"EngineAssociation"[[:space:]]*:[[:space:]]*"[^"]*"' "$project_file" | sed 's/.*"EngineAssociation"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/')
+        
+        # Fallback: try parsing with different whitespace patterns
+        if [[ -z "$engine_version" ]]; then
+            engine_version=$(grep -o '"EngineAssociation":"[^"]*"' "$project_file" | sed 's/"EngineAssociation":"\([^"]*\)"/\1/')
+        fi
+    fi
+    
+    echo "$engine_version"
+}
+
+# Function to validate project file
+validate_project_file() {
+    local project_file=$1
+    
+    if [[ ! -f "$project_file" ]]; then
+        echo -e "${RED}Error: Project file not found: $project_file${NC}"
+        return 1
+    fi
+    
+    if [[ "${project_file##*.}" != "uproject" ]]; then
+        echo -e "${RED}Error: File is not a .uproject file: $project_file${NC}"
+        return 1
+    fi
+    
+    return 0
+}
+
+# Function to launch Unreal Engine
+launch_unreal() {
+    local version=$1
+    local project_file=$2
+    local ue_path=${UE_PATHS[$version]}
+    
+    echo -e "${GREEN}Launching Unreal Engine $version...${NC}"
+    
+    if [[ -n "$project_file" ]]; then
+        # Convert to absolute path if relative
+        if [[ "$project_file" != /* ]]; then
+            project_file="$(pwd)/$project_file"
+        fi
+        echo -e "${BLUE}Project: $project_file${NC}"
+        
+        # Launch with project file, detached from terminal
+        nohup "$ue_path" "$project_file" > /dev/null 2>&1 &
+    else
+        echo -e "${BLUE}Launching editor only${NC}"
+        
+        # Launch editor without project, detached from terminal
+        nohup "$ue_path" > /dev/null 2>&1 &
+    fi
+    
+    local pid=$!
+    echo -e "${GREEN}Unreal Engine launched successfully (PID: $pid)${NC}"
+    echo -e "${YELLOW}Editor is running in the background, you can close this terminal${NC}"
+}
+
+# Main script execution
+main() {
+    local version=""
+    local project_file=""
+    
+    # Parse arguments
+    if [[ $# -eq 0 ]]; then
+        # No arguments - use default version, no project
+        version="$DEFAULT_UE_VERSION"
+        echo -e "${BLUE}No arguments provided, using default engine version: $version${NC}"
+    elif [[ $# -eq 1 ]]; then
+        if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+            show_usage
+            exit 0
+        elif [[ -f "$1" && "${1##*.}" == "uproject" ]]; then
+            # Single argument is a .uproject file - extract version from file
+            project_file="$1"
+            version=$(extract_engine_version "$project_file")
+            
+            if [[ -n "$version" ]]; then
+                echo -e "${BLUE}Project file provided, detected engine version: $version${NC}"
+                # Check if the detected version is available
+                if [[ -z "${UE_PATHS[$version]}" ]]; then
+                    echo -e "${YELLOW}Warning: Detected engine version $version not found in configuration${NC}"
+                    echo -e "${YELLOW}Falling back to default engine version: $DEFAULT_UE_VERSION${NC}"
+                    version="$DEFAULT_UE_VERSION"
+                fi
+            else
+                echo -e "${YELLOW}Warning: Could not detect engine version from project file${NC}"
+                echo -e "${BLUE}Using default engine version: $DEFAULT_UE_VERSION${NC}"
+                version="$DEFAULT_UE_VERSION"
+            fi
+        else
+            # Single argument should be version
+            version="$1"
+        fi
+    elif [[ $# -eq 2 ]]; then
+        # Two arguments - version and project file (explicit version override)
+        version="$1"
+        project_file="$2"
+        echo -e "${BLUE}Explicit version override: $version${NC}"
+    else
+        echo -e "${RED}Error: Too many arguments${NC}"
+        echo ""
+        show_usage
+        exit 1
+    fi
+    
+    # Check if the specified version exists and is executable
+    if ! check_ue_executable "$version"; then
+        exit 1
+    fi
+    
+    # Validate project file if provided
+    if [[ -n "$project_file" ]]; then
+        if ! validate_project_file "$project_file"; then
+            exit 1
+        fi
+    fi
+    
+    # Launch Unreal Engine
+    launch_unreal "$version" "$project_file"
+}
+
+# Run main function with all arguments
+main "$@"

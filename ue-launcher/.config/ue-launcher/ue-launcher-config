@@ -1,0 +1,13 @@
+# Unreal Engine installation paths
+# Format: UE_PATHS["version"]="path/to/UnrealEditor"
+
+# Set your preferred default version
+DEFAULT_UE_VERSION="5.6"
+
+# Declare the associative array
+declare -A UE_PATHS
+
+# Set the paths
+UE_PATHS["5.6"]="/home/jake/UnrealEngine/Unreal_Engine_5.6/Engine/Binaries/Linux/UnrealEditor"
+UE_PATHS["5.5"]="/home/jake/UnrealEngine/Unreal_Engine_5.5/Engine/Binaries/Linux/UnrealEditor"
+UE_PATHS["5.3"]="/home/jake/UnrealEngine/Unreal_Engine_5.3/Engine/Binaries/Linux/UnrealEditor"
