@@ -13,6 +13,7 @@ io.github.Faugus.faugus-launcher
 org.DolphinEmu.dolphin-emu
 info.cemu.Cemu
 net.shadps4.shadPS4
+net.rpcs3.RPCS3
 com.jeffser.Alpaca
 com.obsproject.Studio
 com.protonvpn.www
