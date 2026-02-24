@@ -2,6 +2,7 @@ vim
 kitty
 cava
 cmatrix
+yazi
 git-lfs
 btop
 nvtop
