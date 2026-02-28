@@ -32,7 +32,7 @@
         },
         {
             "type": "os",
-            "key": " 󰌽",
+            "key": " ",
             "format": "{pretty-name}"
         },
         {
@@ -61,8 +61,10 @@
             "type": "memory",
             "key": " "
         },
-        {
-            "type": "disk",
+        {            "type": "swap",
+            "key": " 󰓡"
+        },
+        {            "type": "disk",
             "key": " ",
             "hideFS": "overlay"
         },
