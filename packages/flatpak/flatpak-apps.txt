@@ -10,6 +10,7 @@ io.itch.itch
 net.lutris.Lutris
 app.twintaillauncher.ttl
 io.github.Faugus.faugus-launcher
+org.prismlauncher.PrismLauncher
 org.DolphinEmu.dolphin-emu
 info.cemu.Cemu
 net.shadps4.shadPS4
