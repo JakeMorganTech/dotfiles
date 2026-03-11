@@ -17,5 +17,6 @@ discover
 steam
 godot
 blender
+occt
 ttf-cascadia-code-nerd
 ttf-cascadia-mono-nerd
