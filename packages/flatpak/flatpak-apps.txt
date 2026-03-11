@@ -43,7 +43,7 @@ dev.bragefuglseth.Keypunch
 io.github.shonebinu.Brief
 com.super_productivity.SuperProductivity
 org.onlyoffice.desktopeditors
-flathub org.kde.okular
+org.kde.okular
 org.kde.kclock
 com.ranfdev.DistroShelf
 org.mozilla.Thunderbird
