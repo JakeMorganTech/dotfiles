@@ -1,4 +1,5 @@
 vim
+fastfetch
 kitty
 cava
 cmatrix
@@ -13,7 +14,8 @@ kitty
 starship
 stow
 flatpak
-discover
+xpadneo-dkms
+bazaar
 steam
 godot
 blender
