@@ -2,7 +2,7 @@
 Name=Unreal Engine Launcher
 Comment=Launches Unreal Engine projects with the correct version
 Exec=/home/jake/.local/bin/ue-launcher %f
-Icon=/home/jake/.local/share/icons/unreal-icons/unreal_editor.png
+Icon=/home/jake/.local/share/icons/unreal-icons/unreal-icon.png
 Terminal=false
 Type=Application
 MimeType=application/x-uproject;
