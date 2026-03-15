@@ -48,5 +48,4 @@ org.kde.okular
 org.kde.kclock
 com.ranfdev.DistroShelf
 org.mozilla.Thunderbird
-me.proton.Mail
 com.bitwarden.desktop
