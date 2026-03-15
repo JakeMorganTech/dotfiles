@@ -10,7 +10,7 @@ nvtop
 clang
 dotnet-sdk-8.0
 dotnet-runtime-8.0
-kitty
+distrobox
 starship
 stow
 flatpak
