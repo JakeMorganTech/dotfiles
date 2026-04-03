@@ -49,3 +49,5 @@ org.kde.kclock
 com.ranfdev.DistroShelf
 org.mozilla.Thunderbird
 com.bitwarden.desktop
+org.godotengine.Godot
+org.blender.Blender
