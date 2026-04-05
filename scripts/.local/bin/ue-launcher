@@ -147,6 +147,9 @@ launch_unreal() {
     local version=$1
     local project_file=$2
     local ue_path=${UE_PATHS[$version]}
+
+    # FIX: Force XWayland for Unreal Engine UI stability
+    export SDL_VIDEODRIVER=x11
     
     echo -e "${GREEN}Launching Unreal Engine $version...${NC}"
     
