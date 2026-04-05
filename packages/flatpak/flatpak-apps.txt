@@ -51,3 +51,4 @@ org.mozilla.Thunderbird
 com.bitwarden.desktop
 org.godotengine.Godot
 org.blender.Blender
+flathub org.kde.elisa
