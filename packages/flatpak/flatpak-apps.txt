@@ -16,6 +16,7 @@ info.cemu.Cemu
 net.shadps4.shadPS4
 net.rpcs3.RPCS3
 com.vba_m.visualboyadvance-m
+net.retrodeck.retrodeck
 com.jeffser.Alpaca
 com.obsproject.Studio
 com.protonvpn.www
