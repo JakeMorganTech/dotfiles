@@ -2,6 +2,7 @@ com.discordapp.Discord
 io.github.thetumultuousunicornofdarkness.cpu-x
 com.geeks3d.furmark
 io.github.jonmagon.kdiskmark
+io.github.ilya_zlobintsev.LACT
 com.github.tchx84.Flatseal
 it.mijorus.gearlever
 com.vysp3r.ProtonPlus
@@ -16,7 +17,6 @@ info.cemu.Cemu
 net.shadps4.shadPS4
 net.rpcs3.RPCS3
 com.vba_m.visualboyadvance-m
-net.retrodeck.retrodeck
 com.jeffser.Alpaca
 com.obsproject.Studio
 com.protonvpn.www
