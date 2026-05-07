@@ -38,6 +38,7 @@ org.inkscape.Inkscape
 org.kde.kdenlive
 org.kde.krita
 org.localsend.localsend_app
+org.jellyfin.JellyfinDesktop
 rocks.shy.VacuumTube
 com.rafaelmardojai.Blanket
 net.ankiweb.Anki
