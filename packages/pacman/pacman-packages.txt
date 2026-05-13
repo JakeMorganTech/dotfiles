@@ -1,11 +1,14 @@
 vim
+fish
 fastfetch
 kitty
 cava
 cmatrix
 yazi
+git
 git-lfs
 btop
+htop
 nvtop
 clang
 dotnet-sdk-8.0
@@ -17,8 +20,5 @@ flatpak
 xpadneo-dkms
 bazaar
 steam
-godot
-blender
-occt
 ttf-cascadia-code-nerd
 ttf-cascadia-mono-nerd
