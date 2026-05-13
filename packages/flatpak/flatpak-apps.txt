@@ -1,3 +1,6 @@
+org.mozilla.firefox
+app.zen_browser.zen
+com.brave.Browser
 com.discordapp.Discord
 io.github.thetumultuousunicornofdarkness.cpu-x
 com.geeks3d.furmark
@@ -24,6 +27,7 @@ com.spotify.Client
 com.usebottles.bottles
 fr.handbrake.ghb
 org.videolan.VLC
+org.freac.freac
 io.github.achetagames.epic_asset_manager
 io.github.shiftey.Desktop
 md.obsidian.Obsidian
