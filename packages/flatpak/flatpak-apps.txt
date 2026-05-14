@@ -61,3 +61,4 @@ com.bitwarden.desktop
 org.godotengine.Godot
 org.blender.Blender
 org.kde.elisa
+org.nickvision.tagger
