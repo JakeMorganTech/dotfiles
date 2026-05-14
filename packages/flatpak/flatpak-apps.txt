@@ -55,6 +55,7 @@ org.onlyoffice.desktopeditors
 org.libreoffice.LibreOffice
 org.kde.okular
 org.kde.kclock
+com.vscodium.codium
 com.ranfdev.DistroShelf
 org.mozilla.Thunderbird
 com.bitwarden.desktop
