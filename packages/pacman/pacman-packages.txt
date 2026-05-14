@@ -11,8 +11,8 @@ btop
 htop
 nvtop
 clang
-dotnet-sdk-8.0
-dotnet-runtime-8.0
+dotnet-sdk
+dotnet-runtime
 distrobox
 starship
 stow
