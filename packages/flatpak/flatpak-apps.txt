@@ -1,6 +1,4 @@
 org.freedesktop.Platform.ffmpeg-full
-org.mozilla.firefox
-app.zen_browser.zen
 com.brave.Browser
 com.discordapp.Discord
 io.github.thetumultuousunicornofdarkness.cpu-x
