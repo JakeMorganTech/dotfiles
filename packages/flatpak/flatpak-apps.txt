@@ -18,6 +18,7 @@ org.DolphinEmu.dolphin-emu
 info.cemu.Cemu
 net.shadps4.shadPS4
 net.rpcs3.RPCS3
+net.kuribo64.melonDS
 com.vba_m.visualboyadvance-m
 com.jeffser.Alpaca
 com.obsproject.Studio
