@@ -20,6 +20,7 @@ net.shadps4.shadPS4
 net.rpcs3.RPCS3
 net.kuribo64.melonDS
 org.azahar_emu.Azahar
+org.ppsspp.PPSSPP
 com.vba_m.visualboyadvance-m
 com.jeffser.Alpaca
 com.obsproject.Studio
