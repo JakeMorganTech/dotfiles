@@ -59,7 +59,7 @@ org.kde.okular
 org.kde.kclock
 com.vscodium.codium
 com.ranfdev.DistroShelf
-org.mozilla.Thunderbird
+org.mozilla.thunderbird
 com.bitwarden.desktop
 org.godotengine.Godot
 org.blender.Blender
