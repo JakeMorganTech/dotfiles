@@ -64,4 +64,5 @@ com.bitwarden.desktop
 org.godotengine.Godot
 org.blender.Blender
 org.kde.elisa
+moe.kopuz.kopuz
 org.nickvision.tagger
