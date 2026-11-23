@@ -1,5 +1,3 @@
-org.freedesktop.Platform.ffmpeg-full
-com.brave.Browser
 com.discordapp.Discord
 io.github.thetumultuousunicornofdarkness.cpu-x
 com.geeks3d.furmark
